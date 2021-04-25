@@ -1,4 +1,5 @@
 import { atom, selector } from "recoil";
+import { getUserInfo } from "./api";
 
 const initState = atom({
   key: "count",
@@ -13,4 +14,12 @@ const doubleInitState = selector({
   },
 });
 
-export { initState, doubleInitState };
+const userInfoInitState = selector({
+  key: "userInfo",
+  get: async () => {
+    const res = await getUserInfo();
+    return res.json();
+  },
+});
+
+export { initState, doubleInitState, userInfoInitState };
